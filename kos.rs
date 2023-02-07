@@ -15,16 +15,18 @@ struct CFile
     _tmpfname: *mut char,
 }
 
-extern "C" {
-    fn gdb_init();
-    fn pvr_init_defaults();
-    //fn println(s: &str, ...);
+impl Kos {
+    pub fn test() -> () {
+        unsafe {
+            c_raw::println("Hello, Rust!\n");
+        }
+    }
 }
 
-impl Kos {
-    pub fn test(self) -> () {
-        unsafe {
-            //println("Hello, Rust!\n");
-        }
+pub mod c_raw {
+    extern "C" {
+        pub fn gdb_init();
+        pub fn pvr_init_defaults();
+        pub fn println(s: &str, ...);
     }
 }
